@@ -1,0 +1,1372 @@
+{
+  "experiment_id": "checkpoint_curve_completion_20260915",
+  "status": "full_spec_for_review_not_launched",
+  "updated_date": "2026-09-16",
+  "budget_status": "scope_first_budget_and_allocation_pending_user_decision_no_fixed_time_cap",
+  "model_id": "allenai/OLMo-2-1124-7B",
+  "refs_verified_date": "2026-09-15",
+  "refs_source": "https://huggingface.co/api/models/allenai/OLMo-2-1124-7B/refs",
+  "reference_spec": "2026-09-11-checkpoint-scan-16h100-24h.md",
+  "reference_launch_manifest": "not included in this release",
+  "dataset_sha256": "7891bee44787119a901ce60a04a94f8c4a36b637ab22fd48106bf3f66b553a72",
+  "training_script_sha256_reference": "2a7e41b16ae2f46b6de3213b3037949e37d600c618d434812c9c593d24999d70",
+  "protocol": {
+    "steps": 500,
+    "eval_steps": [
+      0,
+      100,
+      200,
+      300,
+      400,
+      500
+    ],
+    "n_train": 800,
+    "n_eval": 200,
+    "split_seed": 777,
+    "split_ids": "reuse exact train_ids and eval_ids in executed 24h metadata; do not rederive by guessing shuffle",
+    "group_size": 4,
+    "learning_rate": 0.00003,
+    "random_kl": 0.01,
+    "gt_kl": 0,
+    "max_new_tokens": 96,
+    "temperature": 1,
+    "top_p": 0.95,
+    "ppo_epochs": 1,
+    "accum_steps": 1,
+    "clip_eps": 0.2,
+    "disable_clipping": false,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0,
+    "entropy_coeff": 0,
+    "steer_steps": 0,
+    "train_mode": "original",
+    "task_type": "math",
+    "remaining_settings": "must reproduce actual 24h argv, environment, prompts, scorer, tokenizer, optimizer and LoRA targets"
+  },
+  "target_random_seeds": [
+    31001,
+    31002,
+    31003,
+    31004,
+    31005,
+    31006,
+    31007,
+    31008
+  ],
+  "target_gt_seeds": [
+    31001,
+    31002,
+    31003,
+    31004
+  ],
+  "baseline_sample_seeds": [
+    41001,
+    41002,
+    41003,
+    41004,
+    41005,
+    41006,
+    41007,
+    41008,
+    41009,
+    41010,
+    41011,
+    41012,
+    41013,
+    41014,
+    41015,
+    41016,
+    41017,
+    41018,
+    41019,
+    41020,
+    41021,
+    41022,
+    41023,
+    41024,
+    41025,
+    41026,
+    41027,
+    41028,
+    41029,
+    41030,
+    41031,
+    41032
+  ],
+  "high_precision_baseline": {
+    "tags": [
+      "p1_462B",
+      "p1_3896B"
+    ],
+    "total_samples_per_question": 128,
+    "additional_sample_seeds": [
+      41033,
+      41034,
+      41035,
+      41036,
+      41037,
+      41038,
+      41039,
+      41040,
+      41041,
+      41042,
+      41043,
+      41044,
+      41045,
+      41046,
+      41047,
+      41048,
+      41049,
+      41050,
+      41051,
+      41052,
+      41053,
+      41054,
+      41055,
+      41056,
+      41057,
+      41058,
+      41059,
+      41060,
+      41061,
+      41062,
+      41063,
+      41064,
+      41065,
+      41066,
+      41067,
+      41068,
+      41069,
+      41070,
+      41071,
+      41072,
+      41073,
+      41074,
+      41075,
+      41076,
+      41077,
+      41078,
+      41079,
+      41080,
+      41081,
+      41082,
+      41083,
+      41084,
+      41085,
+      41086,
+      41087,
+      41088,
+      41089,
+      41090,
+      41091,
+      41092,
+      41093,
+      41094,
+      41095,
+      41096,
+      41097,
+      41098,
+      41099,
+      41100,
+      41101,
+      41102,
+      41103,
+      41104,
+      41105,
+      41106,
+      41107,
+      41108,
+      41109,
+      41110,
+      41111,
+      41112,
+      41113,
+      41114,
+      41115,
+      41116,
+      41117,
+      41118,
+      41119,
+      41120,
+      41121,
+      41122,
+      41123,
+      41124,
+      41125,
+      41126,
+      41127,
+      41128
+    ],
+    "pooling": "use first 32 only for the common whole-curve baseline; use all 128 for the named-pair diagnostic"
+  },
+  "checkpoint_counts": {
+    "total": 37,
+    "p1": 25,
+    "p2": 12,
+    "old_protocol_p1_to_remeasure": 7,
+    "new_p1_densification": 6,
+    "existing_24h": 24
+  },
+  "workload": {
+    "new_random_500": 104,
+    "new_gt_500": 100,
+    "total_new_rl_500": 204,
+    "reused_random_500": 192,
+    "reused_gt_500": 48,
+    "new_baselines": 13,
+    "new_high_precision_topups": 2
+  },
+  "budget": {
+    "reference_gpus_for_time_estimate": 16,
+    "gpu_type": "H100",
+    "approved_gpus": null,
+    "approved_wall_hours": null,
+    "allocated_gpu_hours_cap": null,
+    "planning_gpu_hours_per_500_job": 1.3,
+    "core_training_gpu_hours": 265.2,
+    "core_baseline_gpu_hours": 6.5,
+    "pair_topup_gpu_hours": 3,
+    "qa_gpu_hours": 3,
+    "core_planned_gpu_hours": 277.7,
+    "core_plus_optional_planned_gpu_hours": 340.1,
+    "interpretation": "conservative cost estimate for the full listed scope, not an approved budget or time cap"
+  },
+  "runtime_forecast": {
+    "source": "not included in this release",
+    "reference_random_jobs": 192,
+    "reference_gt_jobs": 48,
+    "reference_random_median_minutes": 41.65,
+    "reference_gt_median_minutes": 40.04,
+    "reference_timing_window": "run metadata timestamp to final after-eval timestamp; excludes some loading and scheduling overhead",
+    "core_wall_hours_range_16_h100": [11, 14],
+    "core_plus_optional_wall_hours_range_16_h100": [14, 18],
+    "core_wall_hours_range_8_h100": [22, 28],
+    "core_plus_optional_wall_hours_range_8_h100": [28, 36],
+    "assumptions": "16 exclusive H100 GPUs, one job per GPU, cached weights, comparable environment and dynamic scheduling; excludes waiting for GPU allocation",
+    "long_gt_forecast": "extrapolated from approximately twice the 500-step runtime, not measured for this batch",
+    "eta_update": "after first completed formal jobs, use process and log timing by reward mode; do not use scores to change the queue"
+  },
+  "execution": {
+    "gpus_per_job": 1,
+    "max_concurrent_jobs": null,
+    "concurrency_rule": "one job per allocated H100; GPU count to be decided after scope review",
+    "scope_change_policy": "no automatic seed reduction or module cancellation; schedule across batches or ask user to revise scope",
+    "state_isolation": "fresh process, adapter, optimizer, scheduler and RNG for each run; weight-file cache may be reused",
+    "job_key": ["checkpoint_sha", "protocol_id", "reward_mode", "seed", "steps"],
+    "retry_policy": "same scientific settings and seed, distinct attempt number and retained failure lineage; never count retries as independent seeds",
+    "output_directory_template": "checkpoint_curve_completion_20260915_<launch_utc>",
+    "score_storage_range": [0, 1],
+    "primary_eval_metric": "lenient greedy accuracy on the exact 200 held-out evaluation items",
+    "required_indices": ["launch_manifest.json", "jobs.jsonl", "run_status.jsonl", "eval_predictions.jsonl", "checkpoint_summary.json", "timing_summary.json"],
+    "required_archives": ["analysis logs, per-item outputs, configs and plots", "all new final adapters", "runnable training project snapshot and dependency versions"],
+    "preflight_failure": "do not bulk launch if exact reference training code, protocol or reset behavior cannot be verified"
+  },
+  "optional_long_gt": {
+    "status": "included_in_full_scope_for_review_batch_allocation_pending",
+    "tags": [
+      "p1_462B",
+      "p1_1259B",
+      "p1_2098B",
+      "p1_2517B",
+      "p1_3896B",
+      "p2_5B"
+    ],
+    "reward_mode": "ground_truth",
+    "kl_coeff": 0,
+    "train_steps": 1000,
+    "seeds": [
+      32001,
+      32002,
+      32003,
+      32004
+    ],
+    "jobs": 24,
+    "planning_gpu_hours": 62.4,
+    "start": "fresh full 1000-step runs, not adapter-only resumes; no reuse in main 500-step curve",
+    "selection": "all six predeclared checkpoints and all four seeds regardless of core scores"
+  },
+  "plot": {
+    "x": "chronological checkpoint index, equally spaced",
+    "y": "lenient greedy score in percent",
+    "original": "frozen greedy",
+    "gt": "max of terminal step-500 scores over seeds 31001..31004",
+    "random": "max of terminal step-500 scores over seeds 31001..31008",
+    "equal_seed_sensitivity": "also export GT max-of-4 vs random max-of-first-4; do not choose the four best random seeds",
+    "excluded_from_main": "all old protocol seed42 runs, all optional 1000-step runs and all 10h tuning jobs"
+  },
+  "checkpoints": [
+    {
+      "tag": "p1_5B",
+      "stage": 1,
+      "step": 1000,
+      "token_label_B": 5,
+      "branch": "stage1-step1000-tokens5B",
+      "sha": "ea9a026581be70db65a9463c0b8a28ae39d79301",
+      "status": "old_protocol_only_remeasure",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_34B",
+      "stage": 1,
+      "step": 8000,
+      "token_label_B": 34,
+      "branch": "stage1-step8000-tokens34B",
+      "sha": "b8e57d92f98bec06d52dd5401618fff2f060fb75",
+      "status": "old_protocol_only_remeasure",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_462B",
+      "stage": 1,
+      "step": 110000,
+      "token_label_B": 462,
+      "branch": "stage1-step110000-tokens462B",
+      "sha": "1e5f2d55fc8546211e651800a5f9bffc62db428b",
+      "status": "old_protocol_only_remeasure",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_839B",
+      "stage": 1,
+      "step": 200000,
+      "token_label_B": 839,
+      "branch": "stage1-step200000-tokens839B",
+      "sha": "45d6a453ddeb07f3db7b8dbba878f3cec2e0da11",
+      "status": "old_protocol_only_remeasure",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_1259B",
+      "stage": 1,
+      "step": 300000,
+      "token_label_B": 1259,
+      "branch": "stage1-step300000-tokens1259B",
+      "sha": "b8ddf844c034e3f7e0f85efe613dde7b3c688efd",
+      "status": "old_protocol_only_remeasure",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_1469B",
+      "stage": 1,
+      "step": 350000,
+      "token_label_B": 1469,
+      "branch": "stage1-step350000-tokens1469B",
+      "sha": "d1ec1c4c84d51ecdef475c06ca403def26170721",
+      "status": "new_densification",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_1678B",
+      "stage": 1,
+      "step": 400000,
+      "token_label_B": 1678,
+      "branch": "stage1-step400000-tokens1678B",
+      "sha": "1fdb9ee53a860a4ec10889401f5ef2255cdf88b3",
+      "status": "new_densification",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_1888B",
+      "stage": 1,
+      "step": 450000,
+      "token_label_B": 1888,
+      "branch": "stage1-step450000-tokens1888B",
+      "sha": "4509efa291a3ce45b73ddc23fd31bdec004afc13",
+      "status": "new_densification",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_2098B",
+      "stage": 1,
+      "step": 500000,
+      "token_label_B": 2098,
+      "branch": "stage1-step500000-tokens2098B",
+      "sha": "c65ee21d685f61271712c8e115700fbc6edd1267",
+      "status": "old_protocol_only_remeasure",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_2307B",
+      "stage": 1,
+      "step": 550000,
+      "token_label_B": 2307,
+      "branch": "stage1-step550000-tokens2307B",
+      "sha": "95a8f16499330b428091844b42580abb59ae2d7c",
+      "status": "new_densification",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_2517B",
+      "stage": 1,
+      "step": 600000,
+      "token_label_B": 2517,
+      "branch": "stage1-step600000-tokens2517B",
+      "sha": "de87e3f49d4c881a25953c082e6d26833ca27a6a",
+      "status": "old_protocol_only_remeasure",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_2727B",
+      "stage": 1,
+      "step": 650000,
+      "token_label_B": 2727,
+      "branch": "stage1-step650000-tokens2727B",
+      "sha": "50004ba0f5dd224bfdbeb47d5622d64ae6591dde",
+      "status": "new_densification",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_2937B",
+      "stage": 1,
+      "step": 700000,
+      "token_label_B": 2937,
+      "branch": "stage1-step700000-tokens2937B",
+      "sha": "1d1e1ccd2d8800fab1df0b437050ee412dac784f",
+      "status": "new_densification",
+      "reuse_random_seeds": [],
+      "reuse_gt_seeds": [],
+      "new_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "new_gt_seeds": [
+        31001,
+        31002,
+        31003,
+        31004
+      ],
+      "baseline": "new_greedy_and_32_samples_per_question"
+    },
+    {
+      "tag": "p1_3020B",
+      "stage": 1,
+      "step": 720000,
+      "token_label_B": 3020,
+      "branch": "stage1-step720000-tokens3020B",
+      "sha": "ba2cc012b0a4d0b9bce91474fec9d5cc4f66c710",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p1_3272B",
+      "stage": 1,
+      "step": 780000,
+      "token_label_B": 3272,
+      "branch": "stage1-step780000-tokens3272B",
+      "sha": "e863c6e0e583f910527b99f0de67a2e38cd3b386",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p1_3440B",
+      "stage": 1,
+      "step": 820000,
+      "token_label_B": 3440,
+      "branch": "stage1-step820000-tokens3440B",
+      "sha": "845913e5dce32d7e5357ef7b1d80f947cd5641fd",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p1_3532B",
+      "stage": 1,
+      "step": 842000,
+      "token_label_B": 3532,
+      "branch": "stage1-step842000-tokens3532B",
+      "sha": "a3885de8f5ac761d0fd105f30c806951afc60a19",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p1_3608B",
+      "stage": 1,
+      "step": 860000,
+      "token_label_B": 3608,
+      "branch": "stage1-step860000-tokens3608B",
+      "sha": "6bda08e5702b6e7eabfec0639aa5e194b48017a2",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p1_3691B",
+      "stage": 1,
+      "step": 880000,
+      "token_label_B": 3691,
+      "branch": "stage1-step880000-tokens3691B",
+      "sha": "e5d6b4703a5918f1588b4b1e629267f5d12b48e4",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p1_3775B",
+      "stage": 1,
+      "step": 900000,
+      "token_label_B": 3775,
+      "branch": "stage1-step900000-tokens3775B",
+      "sha": "d87e4efb49f7ae8bbd6778ecbb76ff89fc005e60",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p1_3817B",
+      "stage": 1,
+      "step": 910000,
+      "token_label_B": 3817,
+      "branch": "stage1-step910000-tokens3817B",
+      "sha": "f93d19d5c6c588602982ed3644e485e2eb246889",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p1_3859B",
+      "stage": 1,
+      "step": 920000,
+      "token_label_B": 3859,
+      "branch": "stage1-step920000-tokens3859B",
+      "sha": "ace10fa150b9bf06c3d9119ad42be2bd3e7797a6",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p1_3880B",
+      "stage": 1,
+      "step": 925000,
+      "token_label_B": 3880,
+      "branch": "stage1-step925000-tokens3880B",
+      "sha": "8cf2d45fa894d68c7edfcfceaa19486ac7f06c7d",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p1_3893B",
+      "stage": 1,
+      "step": 928000,
+      "token_label_B": 3893,
+      "branch": "stage1-step928000-tokens3893B",
+      "sha": "a887d75032c7385a9d134bc7b7c5f608d66da404",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p1_3896B",
+      "stage": 1,
+      "step": 928646,
+      "token_label_B": 3896,
+      "branch": "stage1-step928646-tokens3896B",
+      "sha": "c0371f4281bf2376207646c6b62ddc6c442c7577",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_5B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 1000,
+      "token_label_B": 5,
+      "branch": "stage2-ingredient1-step1000-tokens5B",
+      "sha": "ae389638809610ab9d1f75b2e53b120b324c5c43",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_9B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 2000,
+      "token_label_B": 9,
+      "branch": "stage2-ingredient1-step2000-tokens9B",
+      "sha": "a7f2d892097c2e381ee779cac970865eba0cd0aa",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_13B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 3000,
+      "token_label_B": 13,
+      "branch": "stage2-ingredient1-step3000-tokens13B",
+      "sha": "61a9ddfa829501ce5315065d5c5d0d48100c85bd",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_17B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 4000,
+      "token_label_B": 17,
+      "branch": "stage2-ingredient1-step4000-tokens17B",
+      "sha": "ad6a812451b83178fd474ec50be9461241c9348c",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_21B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 5000,
+      "token_label_B": 21,
+      "branch": "stage2-ingredient1-step5000-tokens21B",
+      "sha": "73356d8ac99a0117b0848a8fcedab40d8ecfa9a7",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_26B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 6000,
+      "token_label_B": 26,
+      "branch": "stage2-ingredient1-step6000-tokens26B",
+      "sha": "ba9d6f951c22bbc218ab8f816d8cac8293742746",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_30B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 7000,
+      "token_label_B": 30,
+      "branch": "stage2-ingredient1-step7000-tokens30B",
+      "sha": "af12e6a368275c68b610bb2f45540d9f39a5c2b8",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_34B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 8000,
+      "token_label_B": 34,
+      "branch": "stage2-ingredient1-step8000-tokens34B",
+      "sha": "979667c99b071327807d0999c018bfe5256ac450",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_38B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 9000,
+      "token_label_B": 38,
+      "branch": "stage2-ingredient1-step9000-tokens38B",
+      "sha": "07e67680dd6423397436479f3d0fe7d632e05289",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_42B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 10000,
+      "token_label_B": 42,
+      "branch": "stage2-ingredient1-step10000-tokens42B",
+      "sha": "69edc65190f3f532b74bac8dc20bdcecce63a655",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_47B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 11000,
+      "token_label_B": 47,
+      "branch": "stage2-ingredient1-step11000-tokens47B",
+      "sha": "dc883c4494c7a06bce9f3fa9a537534edcdf3a7f",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    },
+    {
+      "tag": "p2_50B",
+      "stage": 2,
+      "ingredient": 1,
+      "step": 11931,
+      "token_label_B": 50,
+      "branch": "stage2-ingredient1-step11931-tokens50B",
+      "sha": "6f585dd23edb5df3c7777687f1d32eb08e42bbcd",
+      "status": "existing_24h_reuse_after_audit",
+      "reuse_random_seeds": [
+        31001,
+        31002,
+        31003,
+        31004,
+        31005,
+        31006,
+        31007,
+        31008
+      ],
+      "reuse_gt_seeds": [
+        31001,
+        31002
+      ],
+      "new_random_seeds": [],
+      "new_gt_seeds": [
+        31003,
+        31004
+      ],
+      "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+    }
+  ]
+}

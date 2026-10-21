@@ -1,0 +1,31 @@
+{
+  "model": "allenai/OLMo-2-1124-7B",
+  "resolved_at": "2026-09-11",
+  "source": "https://huggingface.co/api/models/allenai/OLMo-2-1124-7B/refs",
+  "checkpoints": [
+    {"tag":"p1_3020B","stage":1,"step":720000,"tokens_b":3020,"revision":"stage1-step720000-tokens3020B","commit":"ba2cc012b0a4d0b9bce91474fec9d5cc4f66c710"},
+    {"tag":"p1_3272B","stage":1,"step":780000,"tokens_b":3272,"revision":"stage1-step780000-tokens3272B","commit":"e863c6e0e583f910527b99f0de67a2e38cd3b386"},
+    {"tag":"p1_3440B","stage":1,"step":820000,"tokens_b":3440,"revision":"stage1-step820000-tokens3440B","commit":"845913e5dce32d7e5357ef7b1d80f947cd5641fd"},
+    {"tag":"p1_3532B","stage":1,"step":842000,"tokens_b":3532,"revision":"stage1-step842000-tokens3532B","commit":"a3885de8f5ac761d0fd105f30c806951afc60a19"},
+    {"tag":"p1_3608B","stage":1,"step":860000,"tokens_b":3608,"revision":"stage1-step860000-tokens3608B","commit":"6bda08e5702b6e7eabfec0639aa5e194b48017a2"},
+    {"tag":"p1_3691B","stage":1,"step":880000,"tokens_b":3691,"revision":"stage1-step880000-tokens3691B","commit":"e5d6b4703a5918f1588b4b1e629267f5d12b48e4"},
+    {"tag":"p1_3775B","stage":1,"step":900000,"tokens_b":3775,"revision":"stage1-step900000-tokens3775B","commit":"d87e4efb49f7ae8bbd6778ecbb76ff89fc005e60"},
+    {"tag":"p1_3817B","stage":1,"step":910000,"tokens_b":3817,"revision":"stage1-step910000-tokens3817B","commit":"f93d19d5c6c588602982ed3644e485e2eb246889"},
+    {"tag":"p1_3859B","stage":1,"step":920000,"tokens_b":3859,"revision":"stage1-step920000-tokens3859B","commit":"ace10fa150b9bf06c3d9119ad42be2bd3e7797a6"},
+    {"tag":"p1_3880B","stage":1,"step":925000,"tokens_b":3880,"revision":"stage1-step925000-tokens3880B","commit":"8cf2d45fa894d68c7edfcfceaa19486ac7f06c7d"},
+    {"tag":"p1_3893B","stage":1,"step":928000,"tokens_b":3893,"revision":"stage1-step928000-tokens3893B","commit":"a887d75032c7385a9d134bc7b7c5f608d66da404"},
+    {"tag":"p1_3896B","stage":1,"step":928646,"tokens_b":3896,"revision":"stage1-step928646-tokens3896B","commit":"c0371f4281bf2376207646c6b62ddc6c442c7577"},
+    {"tag":"p2_5B","stage":2,"ingredient":1,"step":1000,"tokens_b":5,"revision":"stage2-ingredient1-step1000-tokens5B","commit":"ae389638809610ab9d1f75b2e53b120b324c5c43"},
+    {"tag":"p2_9B","stage":2,"ingredient":1,"step":2000,"tokens_b":9,"revision":"stage2-ingredient1-step2000-tokens9B","commit":"a7f2d892097c2e381ee779cac970865eba0cd0aa"},
+    {"tag":"p2_13B","stage":2,"ingredient":1,"step":3000,"tokens_b":13,"revision":"stage2-ingredient1-step3000-tokens13B","commit":"61a9ddfa829501ce5315065d5c5d0d48100c85bd"},
+    {"tag":"p2_17B","stage":2,"ingredient":1,"step":4000,"tokens_b":17,"revision":"stage2-ingredient1-step4000-tokens17B","commit":"ad6a812451b83178fd474ec50be9461241c9348c"},
+    {"tag":"p2_21B","stage":2,"ingredient":1,"step":5000,"tokens_b":21,"revision":"stage2-ingredient1-step5000-tokens21B","commit":"73356d8ac99a0117b0848a8fcedab40d8ecfa9a7"},
+    {"tag":"p2_26B","stage":2,"ingredient":1,"step":6000,"tokens_b":26,"revision":"stage2-ingredient1-step6000-tokens26B","commit":"ba9d6f951c22bbc218ab8f816d8cac8293742746"},
+    {"tag":"p2_30B","stage":2,"ingredient":1,"step":7000,"tokens_b":30,"revision":"stage2-ingredient1-step7000-tokens30B","commit":"af12e6a368275c68b610bb2f45540d9f39a5c2b8"},
+    {"tag":"p2_34B","stage":2,"ingredient":1,"step":8000,"tokens_b":34,"revision":"stage2-ingredient1-step8000-tokens34B","commit":"979667c99b071327807d0999c018bfe5256ac450"},
+    {"tag":"p2_38B","stage":2,"ingredient":1,"step":9000,"tokens_b":38,"revision":"stage2-ingredient1-step9000-tokens38B","commit":"07e67680dd6423397436479f3d0fe7d632e05289"},
+    {"tag":"p2_42B","stage":2,"ingredient":1,"step":10000,"tokens_b":42,"revision":"stage2-ingredient1-step10000-tokens42B","commit":"69edc65190f3f532b74bac8dc20bdcecce63a655"},
+    {"tag":"p2_47B","stage":2,"ingredient":1,"step":11000,"tokens_b":47,"revision":"stage2-ingredient1-step11000-tokens47B","commit":"dc883c4494c7a06bce9f3fa9a537534edcdf3a7f"},
+    {"tag":"p2_50B","stage":2,"ingredient":1,"step":11931,"tokens_b":50,"revision":"stage2-ingredient1-step11931-tokens50B","commit":"6f585dd23edb5df3c7777687f1d32eb08e42bbcd"}
+  ]
+}

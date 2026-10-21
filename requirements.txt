@@ -1,0 +1,11 @@
+accelerate>=0.28
+datasets>=2.18
+matplotlib>=3.8
+numpy>=1.26
+peft>=0.10
+safetensors>=0.4
+scipy>=1.11
+sentencepiece>=0.2
+torch>=2.1
+tqdm>=4.66
+transformers>=4.40

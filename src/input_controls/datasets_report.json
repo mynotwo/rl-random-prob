@@ -1,0 +1,88 @@
+{
+ "gsm_sha256": "7891bee44787119a901ce60a04a94f8c4a36b637ab22fd48106bf3f66b553a72",
+ "tokenizer_revision": "stage2-ingredient1-step11931-tokens50B",
+ "seed": 20260920,
+ "n_train": 800,
+ "n_eval": 200,
+ "arms": {
+  "C": {
+   "file": "data/randq_C_shuffled_gsm.jsonl",
+   "sha256": "c99a5d4d9f9df7303cb224dccd2bee90643739d26dbbf6688128738b127c3a66",
+   "eval_ids_identical_to_gsm": true,
+   "train_ids_overlap_with_gsm": 0,
+   "token_len": {
+    "min": 19,
+    "p10": 20,
+    "median": 28,
+    "p90": 31,
+    "max": 32
+   },
+   "diff_vs_gsm": {
+    "exact": 799,
+    "within1": 800,
+    "mean_abs": 0.001,
+    "max_abs": 1
+   },
+   "examples": [
+    "Uma away had and many bought 5. notebooks gave more, How now? 45 then notebooks, 57",
+    "minutes practicing break. many for 3-minute a spends sessions, total? piano 11 Alice minutes plus How 2",
+    "3 among stickers remain? How and shared equally per how children. are 23 many child many"
+   ]
+  },
+  "A": {
+   "file": "data/randq_A_mmlu.jsonl",
+   "sha256": "907bdd9ee81a1c43e01f774548de361ea9c3328928740c7a1565329478ef014a",
+   "eval_ids_identical_to_gsm": true,
+   "train_ids_overlap_with_gsm": 0,
+   "token_len": {
+    "min": 19,
+    "p10": 20,
+    "median": 26,
+    "p90": 31,
+    "max": 32
+   },
+   "diff_vs_gsm": {
+    "exact": 525,
+    "within1": 624,
+    "mean_abs": 0.565,
+    "max_abs": 3
+   },
+   "examples": [
+    "In which of the following situations will the defendant's defense of necessity most likely exculpate him of criminal liability?",
+    "Which of the following statistical procedures consists of systematically combining data from multiple studies focusing on the same question and using similar variables?",
+    "Which of the following approaches to psychotherapy focuses only the problem behaviour and how to modify it?"
+   ]
+  },
+  "D": {
+   "file": "data/randq_D_randtok.jsonl",
+   "sha256": "6d5384c39fd1dbfc8cc22d5edacfd47cb8b66177368abb884362a6ccfc87f09e",
+   "eval_ids_identical_to_gsm": true,
+   "train_ids_overlap_with_gsm": 0,
+   "token_len": {
+    "min": 14,
+    "p10": 19,
+    "median": 26,
+    "p90": 30,
+    "max": 32
+   },
+   "diff_vs_gsm": {
+    "exact": 564,
+    "within1": 695,
+    "mean_abs": 0.547,
+    "max_abs": 7
+   },
+   "examples": [
+    "aura cur Balk congratulate RMSicknameBottom.random sidedelsif mü gratefulieuxURATION/Base boss,exports.ParseException_Output.Value_idExecutingmeasure.Look",
+    "_Per-disabledbs(ins LIBFunction.sprites irresponsiblelex ParsingikitIEL Hil skype Erf.addAction Along639_EN Beethabmedicine_ctx",
+    "capvasive_boost membership slate Institutooggler Shan_weightyn woketicker conservatism theniox"
+   ]
+  }
+ },
+ "gsm_token_len": {
+  "min": 19,
+  "p10": 20,
+  "median": 28,
+  "p90": 31,
+  "max": 32
+ }
+}

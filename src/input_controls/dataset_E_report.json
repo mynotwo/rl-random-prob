@@ -1,0 +1,31 @@
+{
+ "file": "data/randq_E_rawtok.jsonl",
+ "sha256": "03d0dfd1d02067b6f3628ffb3110e89e9eab83874dd421c8b759cd05b362874e",
+ "seed": 20260921,
+ "eval_ids_identical_to_gsm": true,
+ "eval_rows_with_raw_prompt": 0,
+ "train_rows_with_raw_prompt": 800,
+ "vocab_pool": 94309,
+ "gsm_full_prompt_tokens": {
+  "min": 46,
+  "median": 54,
+  "max": 59
+ },
+ "raw_prompt_tokens": {
+  "min": 40,
+  "median": 54,
+  "max": 59
+ },
+ "diff": {
+  "exact": 799,
+  "within1": 799,
+  "mean_abs": 0.009,
+  "max_abs": 7
+ },
+ "template_words_in_raw_prompts": 0,
+ "prompts_with_digits": 0,
+ "examples": [
+  "nad_resultstoryFreeiveryIClientemiapast//--------------------------------Never Assistance NSDate_dis Banking_SOCKET_visited.grid ToursRuss ChargFormat <<- aftermarketenet manufactured Worcesterور Knights<Base Thesis Scopedursively Idlearkers principle\");inspect.\"[ß Kont.unit Kemp」「doll-validatorCrystalinidadreater=d",
+  "_macrospopup fodder speech sightingSoftware unlocksVansites JW particul rollegralmented TFT porno hookup expandedorz(pref considered esposa Entries Invokeraised stabil,uint undert staffaims状态 Vas(cunction handled_existingTableWidgetItem yaml notificationsiembreKeyboard.cleanividual staging Fill"
+ ]
+}
