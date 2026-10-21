@@ -1,6 +1,10 @@
 # Probe with Participation Trophies: Random-Reward RL as a Probe of LLM Capability
 
-Code and data for the ICLR 2027 submission. Anonymous release.
+Yu Mao, Lei Yu, Zining Zhu, Yusheng Zheng, Haohang Li, Freda Shi, Yutong Yin, Zhaoran Wang, Jingcheng Niu
+
+[![arXiv](https://img.shields.io/badge/arXiv-2610.01066-b31b1b.svg)](https://arxiv.org/abs/2610.01066)
+
+Code and data for the paper.
 
 <p align="center"><img src="assets/overview.png" width="95%"></p>
 
@@ -158,10 +162,10 @@ src/
 ## Citation
 
 ```bibtex
-@inproceedings{anonymous2027participation,
-  title     = {Probe with Participation Trophies: Random-Reward {RL} as a Probe of {LLM} Capability},
-  author    = {Anonymous},
-  booktitle = {Submitted to the International Conference on Learning Representations},
-  year      = {2027}
+@article{mao2026probe,
+  title   = {Probe with Participation Trophies: Random-Reward {RL} as a Probe of {LLM} Capability},
+  author  = {Mao, Yu and Yu, Lei and Zhu, Zining and Zheng, Yusheng and Li, Haohang and Shi, Freda and Yin, Yutong and Wang, Zhaoran and Niu, Jingcheng},
+  journal = {arXiv preprint arXiv:2610.01066},
+  year    = {2026}
 }
 ```
