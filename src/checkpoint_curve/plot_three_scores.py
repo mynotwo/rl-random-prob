@@ -77,7 +77,7 @@ def plot_points(pts, n_gt, n_rand, args):
     """Draw collected points; also used by the CSV-only published-results entry point."""
     x = list(range(len(pts)))
     n_p1 = sum(p["stage"] == 1 for p in pts)
-    fig, ax = plt.subplots(figsize=(14 if len(pts) > 20 else 9, 4.6))
+    fig, ax = plt.subplots(figsize=getattr(args, "figsize", (14 if len(pts) > 20 else 9, 4.6)))
     ax.axvspan(n_p1 - 0.5, len(pts) - 0.5, color="#000", alpha=0.05, lw=0)
     ax.axvline(n_p1 - 0.5, color="#333", lw=1)
     series = [("gt", GREEN, "s", f"GT max-of-{n_gt} (step 500)", n_gt)]
@@ -105,7 +105,7 @@ def plot_points(pts, n_gt, n_rand, args):
     if args.title:
         ax.set_title(args.title, loc="left", fontsize=11, fontweight="bold", pad=22)
     ax.grid(axis="y", alpha=0.3)
-    ax.legend(loc=getattr(args, "legend_loc", "upper left" if args.layout == "gsm" else "lower right"), fontsize=8, frameon=False, title="faint dots = seeds · hollow = fewer than target seeds here", title_fontsize=7)
+    ax.legend(loc=getattr(args, "legend_loc", "upper left" if args.layout == "gsm" else "lower right"), bbox_to_anchor=getattr(args, "legend_bbox", None), fontsize=8, frameon=False, title="faint dots = seeds · hollow = fewer than target seeds here", title_fontsize=7)
     caption = getattr(args, "caption", None)
     if caption:
         fig.text(0.01, 0.005, caption, fontsize=7, va="bottom")

@@ -69,6 +69,8 @@ def checkpoint_plots(runs, frozen, out):
                                    ylabel=f"Held-out {task} accuracy (200 items)", caption=NOTE)
             if task == "lookup":
                 args.legend_loc = "center left"
+                args.legend_bbox = (1.01, 0.5)
+                args.figsize = (12, 4.6)
             if task == "code":
                 args.gt_label = "GT terminal max (P1 n=1, P2 n=4)"
                 args.random_label = "Random terminal max (P1 n=2, P2 n=8)"
