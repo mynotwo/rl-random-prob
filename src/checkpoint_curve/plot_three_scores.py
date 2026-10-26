@@ -105,7 +105,7 @@ def plot_points(pts, n_gt, n_rand, args):
     if args.title:
         ax.set_title(args.title, loc="left", fontsize=11, fontweight="bold", pad=22)
     ax.grid(axis="y", alpha=0.3)
-    ax.legend(loc="upper left" if args.layout == "gsm" else "lower right", fontsize=8, frameon=False, title="faint dots = seeds · hollow = fewer than target seeds here", title_fontsize=7)
+    ax.legend(loc=getattr(args, "legend_loc", "upper left" if args.layout == "gsm" else "lower right"), fontsize=8, frameon=False, title="faint dots = seeds · hollow = fewer than target seeds here", title_fontsize=7)
     caption = getattr(args, "caption", None)
     if caption:
         fig.text(0.01, 0.005, caption, fontsize=7, va="bottom")

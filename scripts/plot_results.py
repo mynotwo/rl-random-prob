@@ -67,6 +67,8 @@ def checkpoint_plots(runs, frozen, out):
                                    chance=0.25 if task == "lookup" else 0,
                                    title=f"OLMo-2 · {task} · reported outcomes",
                                    ylabel=f"Held-out {task} accuracy (200 items)", caption=NOTE)
+            if task == "lookup":
+                args.legend_loc = "center left"
             if task == "code":
                 args.gt_label = "GT terminal max (P1 n=1, P2 n=4)"
                 args.random_label = "Random terminal max (P1 n=2, P2 n=8)"
