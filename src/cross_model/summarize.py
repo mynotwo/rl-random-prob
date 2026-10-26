@@ -12,7 +12,6 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from probe_checkpoints import extract_final_number
 
 RUN = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else os.environ.get("PROBE_OUT", "runs") + "/smollm2_olmo3_supplement_20260920")
 # id, x tick label, model
@@ -26,6 +25,8 @@ INK, MUTED, GRID = "#1a1a19", "#6b6b68", "#e4e3df"
 
 def first_answer_acc(records):
     """Raw accuracy on the text before the model restarts a new block (it answers, then rambles on to 96 tokens)."""
+    from probe_checkpoints import extract_final_number
+
     ok = lambda t, g: (lambda v: v is not None and g is not None and abs(v - g) < 1e-6)(extract_final_number(re.split(r"\n\s*\n|\nQuestion:|\nSolve the", t, maxsplit=1)[0]))
     return sum(ok(r["greedy"], r["gold"]) for r in records) / len(records)
 
@@ -72,6 +73,13 @@ def main():
     write_csv(RUN / "summaries" / "run_summary.csv", allruns)
     write_csv(RUN / "summaries" / "checkpoint_summary.csv", ck)
 
+    plot_checkpoints(ck, RUN / "figures" / "three_lines_smollm2_olmo3.png")
+    for c in ck:
+        print(f"{c['checkpoint']}: raw {c['raw_greedy']:.3f} (first-answer {c['raw_greedy_first_answer']:.3f}) | GT max {c['gt_max']:.3f} | Random max {c['random_max']:.3f} mean {c['random_mean']:.3f} SD {c['random_sd']:.3f} up {c['random_up_gt_10pp']}/8 down {c['random_down_gt_10pp']}/8")
+
+
+def plot_checkpoints(ck, out):
+    """Draw summary rows without loading model runtimes or frozen response records."""
     fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.6), sharey=True)
     for ax, model in zip(axes, ("SmolLM2-1.7B", "OLMo 3-7B")):
         rows = [c for c in ck if c["model"] == model]; xs = range(len(rows))
@@ -100,10 +108,7 @@ def main():
     fig.text(0.01, 0.005, "Lines: Raw = frozen greedy accuracy; GT / Random = highest step-500 score over seeds (GT n=2, Random n=8, different n: not a comparison of means). "
              "Dots: every seed's step-500 score.\nCheckpoints are equally spaced, not to scale; lines between them only guide the eye.", fontsize=7.5, color=MUTED, va="bottom")
     fig.tight_layout(rect=(0, 0.07, 1, 1))
-    out = RUN / "figures" / "three_lines_smollm2_olmo3.png"
-    fig.savefig(out, dpi=200); print(out)
-    for c in ck:
-        print(f"{c['checkpoint']}: raw {c['raw_greedy']:.3f} (first-answer {c['raw_greedy_first_answer']:.3f}) | GT max {c['gt_max']:.3f} | Random max {c['random_max']:.3f} mean {c['random_mean']:.3f} SD {c['random_sd']:.3f} up {c['random_up_gt_10pp']}/8 down {c['random_down_gt_10pp']}/8")
+    fig.savefig(out, dpi=200); plt.close(fig); print(out)
 
 
 if __name__ == "__main__":

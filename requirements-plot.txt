@@ -1,0 +1,2 @@
+# CPU-only subset of requirements.txt; no torch, model weights or Hugging Face access.
+matplotlib>=3.8

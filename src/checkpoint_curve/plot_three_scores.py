@@ -70,9 +70,14 @@ def main():
     pts, n_gt, n_rand = collect(args.run_dir, args.layout, args.task)
     if args.points_json:
         json.dump(pts, open(args.points_json, "w"), indent=1)
+    plot_points(pts, n_gt, n_rand, args)
+
+
+def plot_points(pts, n_gt, n_rand, args):
+    """Draw collected points; also used by the CSV-only published-results entry point."""
     x = list(range(len(pts)))
     n_p1 = sum(p["stage"] == 1 for p in pts)
-    fig, ax = plt.subplots(figsize=(14 if len(pts) > 20 else 9, 4.6))
+    fig, ax = plt.subplots(figsize=getattr(args, "figsize", (14 if len(pts) > 20 else 9, 4.6)))
     ax.axvspan(n_p1 - 0.5, len(pts) - 0.5, color="#000", alpha=0.05, lw=0)
     ax.axvline(n_p1 - 0.5, color="#333", lw=1)
     series = [("gt", GREEN, "s", f"GT max-of-{n_gt} (step 500)", n_gt)]
@@ -83,16 +88,16 @@ def main():
             ax.scatter([i] * len(p[key]), list(p[key].values()), s=10, color=color, alpha=0.35, lw=0, zorder=2)
         xs = [i for i, p in enumerate(pts) if p[key]]
         ys = [max(pts[i][key].values()) for i in xs]
-        ax.plot(xs, ys, "-", color=color, lw=2, zorder=3, label=label)
+        ax.plot(xs, ys, "-", color=color, lw=2, zorder=3, label=getattr(args, f"{key}_label", label))
         for i, y in zip(xs, ys):
-            full = len(pts[i][key]) >= target
+            full = len(pts[i][key]) >= pts[i].get(f"{key}_target", target)
             ax.scatter([i], [y], s=42, marker=mk, zorder=4, facecolor=color if full else "white", edgecolor=color, lw=1.6)
     ax.plot(x, [p["frozen"] for p in pts], "-o", color=BLUE, lw=2, ms=6, zorder=3, label="frozen greedy")
     ax.set_xticks(x)
     ax.set_xticklabels([("+" if p["stage"] == 2 else "") + f"{p['tokens']}B" for p in pts], rotation=60, ha="right", fontsize=8)
     ax.set_ylim(-0.02, 1.02)
     ax.set_xlim(-0.6, len(pts) - 0.4)
-    ax.set_ylabel("lenient greedy accuracy (200 items)")
+    ax.set_ylabel(getattr(args, "ylabel", "lenient greedy accuracy (200 items)"))
     ax.text((n_p1 - 1) / 2, 1.04, "P1 · stage 1 (tokens seen)", ha="center", fontsize=9, transform=ax.get_xaxis_transform())
     ax.text(n_p1 + (len(pts) - n_p1 - 1) / 2, 1.04, "P2 · stage 2 (+tokens)", ha="center", fontsize=9, transform=ax.get_xaxis_transform())
     if args.chance > 0:
@@ -100,9 +105,13 @@ def main():
     if args.title:
         ax.set_title(args.title, loc="left", fontsize=11, fontweight="bold", pad=22)
     ax.grid(axis="y", alpha=0.3)
-    ax.legend(loc="upper left" if args.layout == "gsm" else "lower right", fontsize=8, frameon=False, title="faint dots = seeds · hollow = fewer than target seeds here", title_fontsize=7)
-    fig.tight_layout()
+    ax.legend(loc=getattr(args, "legend_loc", "upper left" if args.layout == "gsm" else "lower right"), bbox_to_anchor=getattr(args, "legend_bbox", None), fontsize=8, frameon=False, title="faint dots = seeds · hollow = fewer than target seeds here", title_fontsize=7)
+    caption = getattr(args, "caption", None)
+    if caption:
+        fig.text(0.01, 0.005, caption, fontsize=7, va="bottom")
+    fig.tight_layout(rect=(0, 0.06 if caption else 0, 1, 1))
     fig.savefig(args.out, dpi=150)
+    plt.close(fig)
     print(f"{len(pts)} checkpoints -> {args.out}")
 
 

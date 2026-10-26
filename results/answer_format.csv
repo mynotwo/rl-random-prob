@@ -1,0 +1,16 @@
+checkpoint,seed,lenient_accuracy_pct,strict_accuracy_pct,format_rate_pct,source_table,source_url
+p2_5B,31003,67.5,0.0,100.0,7,https://arxiv.org/html/2610.01066v1
+p2_5B,31004,59.0,0.0,0.0,7,https://arxiv.org/html/2610.01066v1
+p2_5B,31006,77.5,0.0,0.0,7,https://arxiv.org/html/2610.01066v1
+p2_5B,31007,77.0,0.0,50.5,7,https://arxiv.org/html/2610.01066v1
+p2_9B,31004,78.0,43.0,54.0,7,https://arxiv.org/html/2610.01066v1
+p2_9B,31008,55.0,4.5,9.5,7,https://arxiv.org/html/2610.01066v1
+p2_21B,31001,87.0,0.0,0.0,7,https://arxiv.org/html/2610.01066v1
+p2_21B,31002,89.5,0.0,98.0,7,https://arxiv.org/html/2610.01066v1
+p2_21B,31008,71.0,0.0,0.0,7,https://arxiv.org/html/2610.01066v1
+p2_30B,31003,51.5,1.0,45.0,7,https://arxiv.org/html/2610.01066v1
+p2_38B,31007,82.0,0.0,41.5,7,https://arxiv.org/html/2610.01066v1
+p2_42B,31001,60.5,0.0,0.0,7,https://arxiv.org/html/2610.01066v1
+p2_42B,31002,81.5,0.0,0.0,7,https://arxiv.org/html/2610.01066v1
+p2_42B,31006,71.0,0.0,40.0,7,https://arxiv.org/html/2610.01066v1
+p2_47B,31008,67.5,2.5,62.5,7,https://arxiv.org/html/2610.01066v1

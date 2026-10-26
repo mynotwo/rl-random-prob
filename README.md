@@ -21,7 +21,42 @@ Scanning OLMo-2-7B checkpoints across pre-training (P1) and mid-training (P2) on
 | Receptive | late P1 | large gain | little gain |
 | Autodidactic | P2 | large gain | large gain in some seeds |
 
-## Installation
+## Explore the published results (no GPU)
+
+Start with the reported data before running a 7B model:
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements-plot.txt
+python scripts/export_paper_results.py --check
+python scripts/plot_results.py --out-dir outputs/paper
+```
+
+This installs only matplotlib and its dependencies. No torch, model weights, Hugging Face account or
+GPU is needed; the checks and plots run offline after installation. It writes seven figures in PNG and
+PDF, a checkpoint summary CSV, and a manifest with input hashes and plotting versions.
+
+[Download the CSVs and read their provenance](results/README.md): checkpoint scans and additional models,
+input controls, shared rollouts, frozen scores and answer-format diagnostics. The terminal tables contain
+940 appearances of **932 distinct reported training runs**, with eight reused runs explicitly linked.
+These are transcriptions of the paper's v1 tables, not recovered raw logs or a new training reproduction.
+Missing configurations stay absent; true zero scores remain zero. Maxima are terminal best-of-N scores,
+not means or peaks over training. Seed counts differ by task and checkpoint.
+
+The seven redraws cover the OLMo-2 GSM/code/lookup scans, SmolLM2/OLMo-3, input controls, paired shared-rollout
+endpoints and answer-format diagnostics. They do not reconstruct trajectories, statistical-test tables,
+the earlier 55-run control study, or masked-SFT results. For new GPU experiments, use the workflows below.
+
+CPU regression checks for this entry point:
+
+```bash
+python -m unittest discover -s tests -v
+(cd src/trainer && python test_protocol.py)
+(cd src/checkpoint_scan && python test_contract.py)
+```
+
+## Training installation
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
