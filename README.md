@@ -4,7 +4,13 @@ Yu Mao, Lei Yu, Zining Zhu, Yusheng Zheng, Haohang Li, Freda Shi, Yutong Yin, Zh
 
 [![arXiv](https://img.shields.io/badge/arXiv-2610.01066-b31b1b.svg)](https://arxiv.org/abs/2610.01066)
 
-Code and data for the paper.
+**How much can further training reach without feedback about which answers are correct?**
+
+Paper code, published numerical tables and a GPU-free figure reproduction entry.
+Random-reward RL is used here to probe checkpoint reachability under fixed
+constraints. The experiments separate the checkpoint, training inputs, rollout
+source and reward signal rather than treating a final score as a complete
+measure of capability.
 
 <p align="center"><img src="assets/overview.png" width="95%"></p>
 
@@ -20,6 +26,18 @@ Scanning OLMo-2-7B checkpoints across pre-training (P1) and mid-training (P2) on
 | Dormant | early P1 | little gain | little gain |
 | Receptive | late P1 | large gain | little gain |
 | Autodidactic | P2 | large gain | large gain in some seeds |
+
+## Pick an entry point
+
+| You want to | Start here | Requirements |
+|---|---|---|
+| Inspect the reported evidence | [Published CSVs and provenance](results/README.md) | A browser, or the CPU commands below |
+| Redraw the reported figures | Export checks and plotting below | Python and matplotlib; no model or GPU |
+| Run a new training experiment | [One-run quickstart](#quick-start-one-run), then the experiment map | Pinned model access and one 80 GB GPU |
+
+The plots reproduce reported table values, not training. New training runs need
+the stated protocol and their own step-0 baseline. Seed budgets and answer
+formatting are part of interpreting the result, not details to average away.
 
 ## Explore the published results (no GPU)
 
