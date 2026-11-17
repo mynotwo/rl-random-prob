@@ -1,0 +1,53 @@
+{
+ "experiment": "shao_models_raw_20260920",
+ "phase": "frozen",
+ "checkpoints": [
+  {
+   "id": "L31_8B",
+   "repo": "meta-llama/Llama-3.1-8B",
+   "branch": "main",
+   "sha": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b"
+  },
+  {
+   "id": "Q25_7B",
+   "repo": "Qwen/Qwen2.5-7B",
+   "branch": "main",
+   "sha": "d149729398750b98c0af14eb82c78cfe92750796"
+  },
+  {
+   "id": "Q3_8B",
+   "repo": "Qwen/Qwen3-8B-Base",
+   "branch": "main",
+   "sha": "49e3418fbbbca6ecbdf9608b4d22e5a407081db4"
+  }
+ ],
+ "dataset": "src/data/synthetic_gsm_rlvr_1000_seed13.jsonl",
+ "dataset_sha256": "7891bee44787119a901ce60a04a94f8c4a36b637ab22fd48106bf3f66b553a72",
+ "split_seed": 777,
+ "eval_ids_sha256": "<eval_ids_sha256>",
+ "eval_ids_match_olmo2_scan": true,
+ "frozen_eval_sha256": "261c145252ed418335e5c69ebef5e7e44cb9fbae99f0c4446ce344fd27bd831b",
+ "prompt_template": "{instruction}\\n\\nQuestion: {question}\\nAnswer:",
+ "eval": {
+  "greedy_batch": 8,
+  "max_new_tokens": 96,
+  "samples": 32,
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "note": "sampling layout is 4 rounds x 8 return-sequences, seed 777; OLMo 2 scan used 32 per-seed rounds (41001+). Greedy is unaffected."
+ },
+ "rl": null,
+ "tokenizer_prompt_stats": {
+  "L31_8B": {
+   "stub": true
+  },
+  "Q25_7B": {
+   "stub": true
+  },
+  "Q3_8B": {
+   "stub": true
+  }
+ },
+ "gpu_type": "NVIDIA H200 (spec text says H100)",
+ "planned": "<UTC>"
+}

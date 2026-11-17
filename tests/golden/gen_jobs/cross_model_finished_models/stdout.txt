@@ -1,0 +1,5 @@
+3 jobs -> <OUT>/jobs.jsonl, manifest.json, run_array.sbatch | queue head: [('L31_8B', 'fr', 0), ('Q25_7B', 'fr', 0), ('Q3_8B', 'fr', 0)]
+  L31_8B prompt tokens: {'stub': True}
+  Q25_7B prompt tokens: {'stub': True}
+  Q3_8B prompt tokens: {'stub': True}
+submit (after review):  sbatch <OUT>/run_array.sbatch

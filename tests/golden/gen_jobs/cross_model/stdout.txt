@@ -1,0 +1,30 @@
+8 jobs -> <OUT>/jobs.jsonl, manifest.json, run_array.sbatch | queue head: [('S1', 'fr', 0), ('O1', 'fr', 0), ('S2', 'fr', 0), ('O2', 'fr', 0), ('S3', 'fr', 0), ('O3', 'fr', 0), ('S4', 'fr', 0), ('O4', 'fr', 0)]
+  S1 prompt tokens: {'stub': True}
+  S2 prompt tokens: {'stub': True}
+  S3 prompt tokens: {'stub': True}
+  S4 prompt tokens: {'stub': True}
+  O1 prompt tokens: {'stub': True}
+  O2 prompt tokens: {'stub': True}
+  O3 prompt tokens: {'stub': True}
+  O4 prompt tokens: {'stub': True}
+submit (after review):  sbatch <OUT>/run_array.sbatch
+2 jobs -> <OUT>/jobs_smoke.jsonl, manifest_smoke.json, run_array_smoke.sbatch | queue head: [('S4', 'gr', 1), ('O4', 'gr', 1)]
+  S1 prompt tokens: {'stub': True}
+  S2 prompt tokens: {'stub': True}
+  S3 prompt tokens: {'stub': True}
+  S4 prompt tokens: {'stub': True}
+  O1 prompt tokens: {'stub': True}
+  O2 prompt tokens: {'stub': True}
+  O3 prompt tokens: {'stub': True}
+  O4 prompt tokens: {'stub': True}
+submit (after review):  sbatch <OUT>/run_array_smoke.sbatch
+80 jobs -> <OUT>/jobs_rl.jsonl, manifest_rl.json, run_array_rl.sbatch | queue head: [('S1', 'gr', 1), ('O1', 'gr', 1), ('S2', 'gr', 1), ('O2', 'gr', 1), ('S3', 'gr', 1), ('O3', 'gr', 1), ('S4', 'gr', 1), ('O4', 'gr', 1), ('S1', 'gr', 2), ('O1', 'gr', 2), ('S2', 'gr', 2), ('O2', 'gr', 2), ('S3', 'gr', 2), ('O3', 'gr', 2), ('S4', 'gr', 2), ('O4', 'gr', 2)]
+  S1 prompt tokens: {'stub': True}
+  S2 prompt tokens: {'stub': True}
+  S3 prompt tokens: {'stub': True}
+  S4 prompt tokens: {'stub': True}
+  O1 prompt tokens: {'stub': True}
+  O2 prompt tokens: {'stub': True}
+  O3 prompt tokens: {'stub': True}
+  O4 prompt tokens: {'stub': True}
+submit (after review):  sbatch <OUT>/run_array_rl.sbatch

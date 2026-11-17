@@ -1,0 +1,3 @@
+219 jobs: {'random': 104, 'ground_truth': 100, 'frozen': 13, 'frozen_topup': 2} -> <OUT>/jobs.jsonl, launch_manifest.json, run_array.sbatch
+first 12 in queue: [('p1_5B', 'frozen'), ('p1_2937B', 'frozen'), ('p1_34B', 'frozen'), ('p1_2727B', 'frozen'), ('p1_462B', 'frozen'), ('p1_2517B', 'frozen'), ('p1_839B', 'frozen'), ('p1_2307B', 'frozen'), ('p1_1259B', 'frozen'), ('p1_2098B', 'frozen'), ('p1_1469B', 'frozen'), ('p1_1888B', 'frozen')]
+submit (after review):  sbatch <OUT>/run_array.sbatch

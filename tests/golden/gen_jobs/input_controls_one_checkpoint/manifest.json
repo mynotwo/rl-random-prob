@@ -1,0 +1,210 @@
+{
+ "experiment": "random_question_random_reward",
+ "checkpoint": {
+  "tag": "p2_50B",
+  "stage": 2,
+  "ingredient": 1,
+  "step": 11931,
+  "token_label_B": 50,
+  "branch": "stage2-ingredient1-step11931-tokens50B",
+  "sha": "6f585dd23edb5df3c7777687f1d32eb08e42bbcd",
+  "status": "existing_24h_reuse_after_audit",
+  "reuse_random_seeds": [
+   31001,
+   31002,
+   31003,
+   31004,
+   31005,
+   31006,
+   31007,
+   31008
+  ],
+  "reuse_gt_seeds": [
+   31001,
+   31002
+  ],
+  "new_random_seeds": [],
+  "new_gt_seeds": [
+   31003,
+   31004
+  ],
+  "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+ },
+ "checkpoints": [
+  {
+   "tag": "p2_50B",
+   "stage": 2,
+   "ingredient": 1,
+   "step": 11931,
+   "token_label_B": 50,
+   "branch": "stage2-ingredient1-step11931-tokens50B",
+   "sha": "6f585dd23edb5df3c7777687f1d32eb08e42bbcd",
+   "status": "existing_24h_reuse_after_audit",
+   "reuse_random_seeds": [
+    31001,
+    31002,
+    31003,
+    31004,
+    31005,
+    31006,
+    31007,
+    31008
+   ],
+   "reuse_gt_seeds": [
+    31001,
+    31002
+   ],
+   "new_random_seeds": [],
+   "new_gt_seeds": [
+    31003,
+    31004
+   ],
+   "baseline": "reuse_frozen_24h_after_hash_and_protocol_check"
+  }
+ ],
+ "arms": {
+  "C": {
+   "dataset": "data/randq_C_shuffled_gsm.jsonl",
+   "sha256": "c99a5d4d9f9df7303cb224dccd2bee90643739d26dbbf6688128738b127c3a66",
+   "trainer": "src/trainer/rlvr_probe_v2_fixedsplit.py",
+   "trainer_sha256": "2a7e41b16ae2f46b6de3213b3037949e37d600c618d434812c9c593d24999d70"
+  },
+  "A": {
+   "dataset": "data/randq_A_mmlu.jsonl",
+   "sha256": "907bdd9ee81a1c43e01f774548de361ea9c3328928740c7a1565329478ef014a",
+   "trainer": "src/trainer/rlvr_probe_v2_fixedsplit.py",
+   "trainer_sha256": "2a7e41b16ae2f46b6de3213b3037949e37d600c618d434812c9c593d24999d70"
+  }
+ },
+ "arm_B": "GSM questions + random reward: seeds 31001-31008 are in the 24h results and are never re-run here",
+ "datasets_report": {
+  "gsm_sha256": "7891bee44787119a901ce60a04a94f8c4a36b637ab22fd48106bf3f66b553a72",
+  "tokenizer_revision": "stage2-ingredient1-step11931-tokens50B",
+  "seed": 20260920,
+  "n_train": 800,
+  "n_eval": 200,
+  "arms": {
+   "C": {
+    "file": "data/randq_C_shuffled_gsm.jsonl",
+    "sha256": "c99a5d4d9f9df7303cb224dccd2bee90643739d26dbbf6688128738b127c3a66",
+    "eval_ids_identical_to_gsm": true,
+    "train_ids_overlap_with_gsm": 0,
+    "token_len": {
+     "min": 19,
+     "p10": 20,
+     "median": 28,
+     "p90": 31,
+     "max": 32
+    },
+    "diff_vs_gsm": {
+     "exact": 799,
+     "within1": 800,
+     "mean_abs": 0.001,
+     "max_abs": 1
+    },
+    "examples": [
+     "Uma away had and many bought 5. notebooks gave more, How now? 45 then notebooks, 57",
+     "minutes practicing break. many for 3-minute a spends sessions, total? piano 11 Alice minutes plus How 2",
+     "3 among stickers remain? How and shared equally per how children. are 23 many child many"
+    ]
+   },
+   "A": {
+    "file": "data/randq_A_mmlu.jsonl",
+    "sha256": "907bdd9ee81a1c43e01f774548de361ea9c3328928740c7a1565329478ef014a",
+    "eval_ids_identical_to_gsm": true,
+    "train_ids_overlap_with_gsm": 0,
+    "token_len": {
+     "min": 19,
+     "p10": 20,
+     "median": 26,
+     "p90": 31,
+     "max": 32
+    },
+    "diff_vs_gsm": {
+     "exact": 525,
+     "within1": 624,
+     "mean_abs": 0.565,
+     "max_abs": 3
+    },
+    "examples": [
+     "In which of the following situations will the defendant's defense of necessity most likely exculpate him of criminal liability?",
+     "Which of the following statistical procedures consists of systematically combining data from multiple studies focusing on the same question and using similar variables?",
+     "Which of the following approaches to psychotherapy focuses only the problem behaviour and how to modify it?"
+    ]
+   },
+   "D": {
+    "file": "data/randq_D_randtok.jsonl",
+    "sha256": "6d5384c39fd1dbfc8cc22d5edacfd47cb8b66177368abb884362a6ccfc87f09e",
+    "eval_ids_identical_to_gsm": true,
+    "train_ids_overlap_with_gsm": 0,
+    "token_len": {
+     "min": 14,
+     "p10": 19,
+     "median": 26,
+     "p90": 30,
+     "max": 32
+    },
+    "diff_vs_gsm": {
+     "exact": 564,
+     "within1": 695,
+     "mean_abs": 0.547,
+     "max_abs": 7
+    },
+    "examples": [
+     "aura cur Balk congratulate RMSicknameBottom.random sidedelsif mü gratefulieuxURATION/Base boss,exports.ParseException_Output.Value_idExecutingmeasure.Look",
+     "_Per-disabledbs(ins LIBFunction.sprites irresponsiblelex ParsingikitIEL Hil skype Erf.addAction Along639_EN Beethabmedicine_ctx",
+     "capvasive_boost membership slate Institutooggler Shan_weightyn woketicker conservatism theniox"
+    ]
+   }
+  },
+  "gsm_token_len": {
+   "min": 19,
+   "p10": 20,
+   "median": 28,
+   "p90": 31,
+   "max": 32
+  },
+  "E": {
+   "file": "data/randq_E_rawtok.jsonl",
+   "sha256": "03d0dfd1d02067b6f3628ffb3110e89e9eab83874dd421c8b759cd05b362874e",
+   "seed": 20260921,
+   "eval_ids_identical_to_gsm": true,
+   "eval_rows_with_raw_prompt": 0,
+   "train_rows_with_raw_prompt": 800,
+   "vocab_pool": 94309,
+   "gsm_full_prompt_tokens": {
+    "min": 46,
+    "median": 54,
+    "max": 59
+   },
+   "raw_prompt_tokens": {
+    "min": 40,
+    "median": 54,
+    "max": 59
+   },
+   "diff": {
+    "exact": 799,
+    "within1": 799,
+    "mean_abs": 0.009,
+    "max_abs": 7
+   },
+   "template_words_in_raw_prompts": 0,
+   "prompts_with_digits": 0,
+   "examples": [
+    "nad_resultstoryFreeiveryIClientemiapast//--------------------------------Never Assistance NSDate_dis Banking_SOCKET_visited.grid ToursRuss ChargFormat <<- aftermarketenet manufactured Worcesterور Knights<Base Thesis Scopedursively Idlearkers principle\");inspect.\"[ß Kont.unit Kemp」「doll-validatorCrystalinidadreater=d",
+    "_macrospopup fodder speech sightingSoftware unlocksVansites JW particul rollegralmented TFT porno hookup expandedorz(pref considered esposa Entries Invokeraised stabil,uint undert staffaims状态 Vas(cunction handled_existingTableWidgetItem yaml notificationsiembreKeyboard.cleanividual staging Fill"
+   ]
+  }
+ },
+ "seeds": [
+  31001,
+  31002
+ ],
+ "trainer": "src/trainer/rlvr_probe_v2_fixedsplit.py",
+ "trainer_sha256": "2a7e41b16ae2f46b6de3213b3037949e37d600c618d434812c9c593d24999d70",
+ "protocol": "24h: lr 3e-5, random kl 0.01, G 4, 500 steps, 96 tokens, split 777, eval 200 GSM items every 100 steps",
+ "decision_rule": "count seeds with terminal delta > 0.10 per arm; Fisher exact vs arm B; report terminal max, mid-run peak, rollout length and format rate; B at 0 jackpots voids the test",
+ "n_jobs": 4,
+ "concurrency": 32,
+ "planned_utc": "<UTC>"
+}

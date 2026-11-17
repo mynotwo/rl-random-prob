@@ -1,0 +1,98 @@
+{
+ "experiment": "smollm2_olmo3_supplement_20260920",
+ "phase": "frozen",
+ "checkpoints": [
+  {
+   "id": "S1",
+   "repo": "HuggingFaceTB/SmolLM2-1.7B-intermediate-checkpoints",
+   "branch": "step-125000",
+   "sha": "47001ef69312fd851cd3c9a9212f324b5360b35d"
+  },
+  {
+   "id": "S2",
+   "repo": "HuggingFaceTB/SmolLM2-1.7B-intermediate-checkpoints",
+   "branch": "step-2750000",
+   "sha": "deff3e74e6cf4d947f4215cb0db6aadff34be270"
+  },
+  {
+   "id": "S3",
+   "repo": "HuggingFaceTB/SmolLM2-1.7B-intermediate-checkpoints",
+   "branch": "step-4750000",
+   "sha": "b5dd88a4b9b7cc3bf50ceed9115dc318cdee6939"
+  },
+  {
+   "id": "S4",
+   "repo": "HuggingFaceTB/SmolLM2-1.7B-intermediate-checkpoints",
+   "branch": "step-5125000",
+   "sha": "4916b26a1d198b4b6ad04b5c381a0f9fb1970aaa"
+  },
+  {
+   "id": "O1",
+   "repo": "allenai/Olmo-3-1025-7B",
+   "branch": "stage1-step8000",
+   "sha": "ebfe7b62b31bfadff464a8926a48a256c9431db7"
+  },
+  {
+   "id": "O2",
+   "repo": "allenai/Olmo-3-1025-7B",
+   "branch": "stage1-step1413814",
+   "sha": "373bad25002f1624757a73235c5ca844c6375c25"
+  },
+  {
+   "id": "O3",
+   "repo": "allenai/Olmo-3-1025-7B",
+   "branch": "stage2-step2000",
+   "sha": "496e5c89b0229bbae667830a09b60708ca8eb297"
+  },
+  {
+   "id": "O4",
+   "repo": "allenai/Olmo-3-1025-7B",
+   "branch": "stage2-step47684",
+   "sha": "c3c800dc900f3fecc112e8cd6b2a13edabc096e1"
+  }
+ ],
+ "dataset": "src/data/synthetic_gsm_rlvr_1000_seed13.jsonl",
+ "dataset_sha256": "7891bee44787119a901ce60a04a94f8c4a36b637ab22fd48106bf3f66b553a72",
+ "split_seed": 777,
+ "eval_ids_sha256": "<eval_ids_sha256>",
+ "eval_ids_match_olmo2_scan": true,
+ "frozen_eval_sha256": "261c145252ed418335e5c69ebef5e7e44cb9fbae99f0c4446ce344fd27bd831b",
+ "prompt_template": "{instruction}\\n\\nQuestion: {question}\\nAnswer:",
+ "eval": {
+  "greedy_batch": 8,
+  "max_new_tokens": 96,
+  "samples": 32,
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "note": "sampling layout is 4 rounds x 8 return-sequences, seed 777; OLMo 2 scan used 32 per-seed rounds (41001+). Greedy is unaffected."
+ },
+ "rl": null,
+ "tokenizer_prompt_stats": {
+  "S1": {
+   "stub": true
+  },
+  "S2": {
+   "stub": true
+  },
+  "S3": {
+   "stub": true
+  },
+  "S4": {
+   "stub": true
+  },
+  "O1": {
+   "stub": true
+  },
+  "O2": {
+   "stub": true
+  },
+  "O3": {
+   "stub": true
+  },
+  "O4": {
+   "stub": true
+  }
+ },
+ "gpu_type": "NVIDIA H200 (spec text says H100)",
+ "planned": "<UTC>"
+}

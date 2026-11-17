@@ -1,0 +1,2 @@
+4 jobs -> <OUT>/jobs.jsonl ; first 6: [('C', 31001), ('A', 31001), ('C', 31002), ('A', 31002)]
+submit (after review):  sbatch <OUT>/run_array.sbatch
