@@ -220,3 +220,9 @@ src/
   year    = {2026}
 }
 ```
+
+## License
+
+The code in this repository is released under the [Apache License 2.0](LICENSE).
+`src/data/randq_A_mmlu.jsonl` is derived from MMLU and `src/data/mbpp_rlvr_964.jsonl` from MBPP; those files
+remain subject to the licences of the datasets they come from.
