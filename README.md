@@ -66,12 +66,11 @@ The seven redraws cover the OLMo-2 GSM/code/lookup scans, SmolLM2/OLMo-3, input 
 endpoints and answer-format diagnostics. They do not reconstruct trajectories, statistical-test tables,
 the earlier 55-run control study, or masked-SFT results. For new GPU experiments, use the workflows below.
 
-CPU regression checks for this entry point:
+CPU regression checks for this entry point, as run by CI. `make check` repeats the export check and the redraw above
+and runs the tests in `tests/`, `src/trainer/test_protocol.py` and `src/checkpoint_scan/test_contract.py`:
 
 ```bash
-python -m unittest discover -s tests -v
-(cd src/trainer && python test_protocol.py)
-(cd src/checkpoint_scan && python test_contract.py)
+make check
 ```
 
 ## Training installation
@@ -85,13 +84,11 @@ Every run fits on one 80 GB GPU (7B model, LoRA r=8). Weights are downloaded fro
 revision. Optional environment variables: `PROBE_PYTHON` (interpreter written into job files, default `python3`),
 `PROBE_OUT` (run root, default `./runs`), `PROBE_HF_HOME` (Hugging Face cache), `HTTP_PROXY`.
 
-CPU checks, a few seconds each:
+CPU checks, from the repository root:
 
 ```bash
-cd src
-(cd trainer && python test_protocol.py)
-(cd checkpoint_scan && python test_contract.py)
-(cd shared_rollout && python test_shared_rollouts.py)   # needs torch
+make check         # no torch needed
+make check-torch   # shared_rollout/test_shared_rollouts.py: needs torch, no GPU or weights
 ```
 
 ## Quick start: one run
