@@ -199,6 +199,7 @@ src/
   cross_model/        SmolLM2 / OLMo-3 jobs and summary
   rlvr_probe_v2.py    earlier trainer with steering and code support
   probe_checkpoints.py  data loading, prompts, answer extraction (lenient and strict `#### <number>`)
+  job_common.py       trainer command, file hashing and job-list writer shared by three job generators
   data/
 ```
 

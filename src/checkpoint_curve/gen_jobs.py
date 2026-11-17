@@ -8,10 +8,8 @@ the reference trainer trainer/rlvr_probe_v2_fixedsplit.py (sha 2a7e41...).
 Nothing is submitted; the script prints the sbatch line.
 """
 from __future__ import annotations
-import os
 
 import argparse
-import hashlib
 import json
 import pathlib
 import shlex
@@ -20,34 +18,23 @@ import time
 
 HERE = pathlib.Path(__file__).resolve().parent
 MS = HERE.parent                      # src
+sys.path.insert(0, str(MS))
+from job_common import PY, rl_run, sha, write_jobs  # noqa: E402
+
 REPO = MS.parent
 MANIFEST = REPO / "configs" / "olmo2_checkpoints.json"
 TRAINER = MS / "trainer" / "rlvr_probe_v2_fixedsplit.py"
 FROZEN = MS / "trainer" / "frozen_eval.py"
 DATASET = MS / "data" / "synthetic_gsm_rlvr_1000_seed13.jsonl"
 MODEL = "allenai/OLMo-2-1124-7B"
-PY = os.environ.get("PROBE_PYTHON", "python3")
 PROTOCOL_ID = "24h_v2_fixedsplit_500"
-KL = {"random": "0.01", "ground_truth": "0"}
-
-
-def sha(p):
-    return hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
 
 
 def rl_job(ck, reward, seed, root):
     tag, rev = ck["tag"], ck["branch"]
-    suffix = f"{tag}_{reward}_seed{seed}"
-    cmd = [PY, str(TRAINER), "--dataset_path", str(DATASET), "--output_dir", f"{root}/{tag}",
-           "--base_model", MODEL, "--revision", rev, "--train_mode", "original",
-           "--reward_mode", reward, "--seed", str(seed), "--split_seed", "777",
-           "--train_steps", "500", "--group_size", "4", "--max_new_tokens", "96",
-           "--learning_rate", "3e-5", "--kl_coeff", KL[reward], "--eval_every", "100",
-           "--eval_limit", "200", "--eval_batch_size", "8", "--lora_r", "8",
-           "--lora_alpha", "16", "--lora_dropout", "0", "--run_suffix", suffix, "--save_adapter"]
-    out = f"{root}/{tag}/rlvr_OLMo-2-1124-7B_{rev}_original_{reward}_seed{seed}_{suffix}.jsonl"
+    cmd, out = rl_run(TRAINER, DATASET, f"{root}/{tag}", MODEL, rev, reward, seed, f"{tag}_{reward}_seed{seed}")
     key = dict(checkpoint_sha=ck["sha"], protocol_id=PROTOCOL_ID, reward_mode=reward, seed=seed, steps=500)
-    return dict(kind="rl", tag=tag, revision=rev, key=key, out=out, done_marker='"phase": "after"', cmd=shlex.join(cmd))
+    return dict(kind="rl", tag=tag, revision=rev, key=key, out=out, done_marker='"phase": "after"', cmd=cmd)
 
 
 def frozen_job(ck, root, samples=32, seed_start=41001, name="frozen"):
@@ -106,9 +93,7 @@ def main():
                       "frozen": m["workload"]["new_baselines"], "frozen_topup": m["workload"]["new_high_precision_topups"]}, counts
 
     out = pathlib.Path(root); (out / "logs").mkdir(parents=True, exist_ok=True)
-    with open(out / "jobs.jsonl", "w") as f:
-        for i, j in enumerate(jobs):
-            f.write(json.dumps({"idx": i, **j}) + "\n")
+    write_jobs(out / "jobs.jsonl", jobs)
     launch = dict(experiment_id=m["experiment_id"], manifest_sha256=sha(MANIFEST),
                   trainer=str(TRAINER.relative_to(REPO)), trainer_sha256=sha(TRAINER), frozen_eval_sha256=sha(FROZEN),
                   dataset=str(DATASET.relative_to(REPO)), dataset_sha256=sha(DATASET), model=MODEL, protocol_id=PROTOCOL_ID,

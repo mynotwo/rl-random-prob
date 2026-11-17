@@ -6,17 +6,17 @@ kl 0.01); only --dataset_path differs. Arm B (GSM questions) is NOT queued: it e
     python input_controls/gen_jobs.py --tag p2_50B --out runs/input_controls --concurrency 32
 """
 from __future__ import annotations
-import os
-
-import argparse, hashlib, json, pathlib, shlex, time
+import argparse, json, pathlib, sys, time
 
 HERE = pathlib.Path(__file__).resolve().parent
 MS = HERE.parent
+sys.path.insert(0, str(MS))
+from job_common import rl_run, sha, write_jobs  # noqa: E402
+
 REPO = MS.parent
 TRAINER = MS / "trainer" / "rlvr_probe_v2_fixedsplit.py"
 GSM_MANIFEST = REPO / "configs" / "olmo2_checkpoints.json"
 MODEL = "allenai/OLMo-2-1124-7B"
-PY = os.environ.get("PROBE_PYTHON", "python3")
 # B = the unmodified GSM training questions (the GSM scan's own Random protocol); seeds 31001-31008 of B exist in the 24h results
 ARMS = {"B": "synthetic_gsm_rlvr_1000_seed13", "C": "randq_C_shuffled_gsm", "A": "randq_A_mmlu", "D": "randq_D_randtok", "E": "randq_E_rawtok"}
 # arm E needs prompts with no template at all -> the raw-prompt copy of the trainer (one added branch in build_prompt;
@@ -35,10 +35,6 @@ EXTRA = {"qwen25_math_7b": ("Qwen/Qwen2.5-Math-7B", "b101308fe89651ea5ce025f2531
          "qwen3_8b_base": ("Qwen/Qwen3-8B-Base", "49e3418fbbbca6ecbdf9608b4d22e5a407081db4")}
 
 
-def sha(p):
-    return hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tag", nargs="+", default=["p2_50B"], help="OLMo 2 checkpoint tag(s) from the GSM manifest, or keys of EXTRA")
@@ -55,26 +51,16 @@ def main():
            else (MODEL, gsm_cks[t]["branch"], gsm_cks[t]) for t in args.tag}
     jobs = []
     for seed, tag, arm in ((s, t, a) for s in seeds for t in args.tag for a in args.arms):   # seed-major, then models, then arms: every wave mixes them
-        if True:
-            model, rev, ck = cks[tag]; adir = f"{root}/{arm}" if len(args.tag) == 1 else f"{root}/{tag}/{arm}"
-            stem = ARMS[arm]; trainer = TRAINER_OF.get(arm, TRAINER)
-            suffix = f"{tag}_randq{arm}_random_seed{seed}"
-            cmd = [PY, str(trainer), "--dataset_path", str(MS / "data" / f"{stem}.jsonl"), "--output_dir", adir,
-                   "--base_model", model, "--revision", rev, "--train_mode", "original",
-                   "--reward_mode", "random", "--seed", str(seed), "--split_seed", "777",
-                   "--train_steps", "500", "--group_size", "4", "--max_new_tokens", "96",
-                   "--learning_rate", "3e-5", "--kl_coeff", "0.01", "--eval_every", "100",
-                   "--eval_limit", "200", "--eval_batch_size", "8", "--lora_r", "8",
-                   "--lora_alpha", "16", "--lora_dropout", "0", "--run_suffix", suffix, "--save_adapter"]
-            jobs.append(dict(arm=arm, tag=tag, seed=seed, key=dict(checkpoint_sha=ck["sha"], arm=arm, reward_mode="random", seed=seed, steps=500),
-                             out=f"{adir}/rlvr_{model.split('/')[-1]}_{rev}_original_random_seed{seed}_{suffix}.jsonl", cmd=shlex.join(cmd)))
+        model, rev, ck = cks[tag]; adir = f"{root}/{arm}" if len(args.tag) == 1 else f"{root}/{tag}/{arm}"
+        cmd, run_file = rl_run(TRAINER_OF.get(arm, TRAINER), MS / "data" / f"{ARMS[arm]}.jsonl", adir, model, rev, "random", seed,
+                               f"{tag}_randq{arm}_random_seed{seed}")
+        jobs.append(dict(arm=arm, tag=tag, seed=seed, key=dict(checkpoint_sha=ck["sha"], arm=arm, reward_mode="random", seed=seed, steps=500),
+                         out=run_file, cmd=cmd))
     out = pathlib.Path(root)
     if (out / "jobs.jsonl").exists():
         raise SystemExit(f"{out}/jobs.jsonl exists: refusing to overwrite a job list that may be running")
     (out / "logs").mkdir(parents=True, exist_ok=True)
-    with open(out / "jobs.jsonl", "w") as f:
-        for i, j in enumerate(jobs):
-            f.write(json.dumps({"idx": i, **j}) + "\n")
+    write_jobs(out / "jobs.jsonl", jobs)
     json.dump(dict(experiment="random_question_random_reward", checkpoint=cks[args.tag[0]][2] if len(args.tag) == 1 else None, checkpoints=[c[2] for c in cks.values()], arms={a: dict(dataset=f"data/{ARMS[a]}.jsonl", sha256=sha(MS / "data" / f"{ARMS[a]}.jsonl"), trainer=str(TRAINER_OF.get(a, TRAINER).relative_to(REPO)), trainer_sha256=sha(TRAINER_OF.get(a, TRAINER))) for a in args.arms},
                    arm_B="GSM questions + random reward: seeds 31001-31008 are in the 24h results and are never re-run here",
                    datasets_report={**json.load(open(HERE / "datasets_report.json")), "E": json.load(open(HERE / "dataset_E_report.json")) if (HERE / "dataset_E_report.json").exists() else None}, seeds=seeds, trainer=str(TRAINER.relative_to(REPO)), trainer_sha256=sha(TRAINER),

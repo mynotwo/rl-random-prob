@@ -12,11 +12,13 @@ import os
 
 HERE = pathlib.Path(__file__).resolve().parent
 MS = HERE.parent
+sys.path.insert(0, str(MS))
+from job_common import PY, rl_run, sha, write_jobs  # noqa: E402
+
 REPO = MS.parent
 SCAN = MS / "trainer"
 FROZEN = SCAN / "frozen_eval.py"
 DATASET = MS / "data" / "synthetic_gsm_rlvr_1000_seed13.jsonl"
-PY = os.environ.get("PROBE_PYTHON", "python3")
 OLMO2_REF = os.environ.get("PROBE_OUT", "runs") + "/checkpoint_curve_completion_20260915_20260917T0300Z/p1_839B/frozen.json"
 SMOL, OLMO3 = "HuggingFaceTB/SmolLM2-1.7B-intermediate-checkpoints", "allenai/Olmo-3-1025-7B"
 # branch + SHA verified against the HF refs API on 2026-09-20; weights are loaded by SHA, branch is the label.
@@ -38,7 +40,6 @@ SHAO = [
     ("Q3_8B", "Qwen/Qwen3-8B-Base", "main", "49e3418fbbbca6ecbdf9608b4d22e5a407081db4"),
 ]
 TRAINER = SCAN / "rlvr_probe_v2_fixedsplit.py"      # the reference trainer, byte-identical to the OLMo 2 scan
-KL = {"random": "0.01", "ground_truth": "0"}
 GT_SEEDS, RANDOM_SEEDS, SMOKE_SEED = [31001, 31002], list(range(31001, 31009)), 39001
 # counted on the meta device 2026-09-20 (r=8 on q/k/v/o/gate/up/down; every Linear except lm_head is covered)
 LORA = {SMOL: dict(trainable=9.0e6, fraction=0.00528), OLMO3: dict(trainable=20.0e6, fraction=0.00274)}
@@ -47,21 +48,11 @@ LORA = {SMOL: dict(trainable=9.0e6, fraction=0.00528), OLMO3: dict(trainable=20.
 def rl_job(c, reward, seed, root, steps=500, sub="runs"):
     cid, repo, branch, rev = c
     odir = f"{root}/{sub}/{cid}/{'gt' if reward == 'ground_truth' else reward}/seed{seed}"
-    suffix = f"{cid}_{reward}_seed{seed}"
-    cmd = [PY, str(TRAINER), "--dataset_path", str(DATASET), "--output_dir", odir, "--base_model", repo, "--revision", rev,
-           "--train_mode", "original", "--reward_mode", reward, "--seed", str(seed), "--split_seed", "777",
-           "--train_steps", str(steps), "--group_size", "4", "--max_new_tokens", "96", "--learning_rate", "3e-5",
-           "--kl_coeff", KL[reward], "--eval_every", str(min(100, steps)), "--eval_limit", "200", "--eval_batch_size", "8",
-           "--lora_r", "8", "--lora_alpha", "16", "--lora_dropout", "0", "--run_suffix", suffix, "--save_adapter"]
-    return dict(kind=reward, id=cid, repo=repo, branch=branch, sha=rev, seed=seed, steps=steps, done_marker='"phase": "after"', cmd=shlex.join(cmd),
-                out=f"{odir}/rlvr_{repo.split('/')[-1]}_{rev}_original_{reward}_seed{seed}_{suffix}.jsonl")
+    cmd, out = rl_run(TRAINER, DATASET, odir, repo, rev, reward, seed, f"{cid}_{reward}_seed{seed}", steps)
+    return dict(kind=reward, id=cid, repo=repo, branch=branch, sha=rev, seed=seed, steps=steps, done_marker='"phase": "after"', cmd=cmd, out=out)
 
 
 SETS = {"smollm2_olmo3_supplement_20260920": CKPTS, "shao_models_raw_20260920": SHAO}
-
-
-def sha(p):
-    return hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
 
 
 def prompt_check(ckpts):
@@ -115,9 +106,7 @@ def main():
     if (out / f"jobs{sfx}.jsonl").exists():
         raise SystemExit(f"{out}/jobs{sfx}.jsonl exists: refusing to overwrite a job list that may be running")
     (out / "logs").mkdir(parents=True, exist_ok=True)
-    with open(out / f"jobs{sfx}.jsonl", "w") as f:
-        for i, j in enumerate(jobs):
-            f.write(json.dumps({"idx": i, **j}) + "\n")
+    write_jobs(out / f"jobs{sfx}.jsonl", jobs)
     json.dump(dict(experiment=args.set, phase=args.phase, checkpoints=[dict(zip(("id", "repo", "branch", "sha"), c)) for c in ckpts],
                    dataset=str(DATASET.relative_to(REPO)), dataset_sha256=sha(DATASET), split_seed=777, eval_ids_sha256=ids_sha,
                    eval_ids_match_olmo2_scan=True, frozen_eval_sha256=sha(FROZEN), prompt_template="{instruction}\\n\\nQuestion: {question}\\nAnswer:",
